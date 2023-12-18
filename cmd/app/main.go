@@ -13,7 +13,6 @@ import (
 	"wbtech1421/iternal/stan/client"
 )
 
-// todo протестировать http через постман
 func main() {
 	//инизацилация таблице в бд
 	fmt.Println("INIT TABLE RESULT")
