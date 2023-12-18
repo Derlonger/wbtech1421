@@ -59,20 +59,25 @@ func InitTable() error {
 	return nil
 }
 
-//// Пример заказа
-//order := data.Order{
-//	OrderUID: "12521111415",
-//}
-//
-//err = saveOrder(db, order)
-//if err != nil {
-//	log.Fatal(err)
-//}
-//
-//ordersdd, err := getOrder(db, order.OrderUID)
-//if err != nil {
-//	log.Fatal(err)
-//}
-//fmt.Println(ordersdd)
-//
-//fmt.Println("Заказ успешно сохранен в базу данныхю.")
+func GetOrder(orderID string) (*data.Order, error) {
+	dsn := "host=localhost user=admin password=admin dbname=wbtech_db port=5432 sslmode=disable"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	sqlDB, _ := db.DB()
+	defer sqlDB.Close()
+
+	var order2 Order2
+	if err := db.Table("orders").Where("id = ?", orderID).First(&order2).Error; err != nil {
+		return nil, err
+	}
+
+	var order data.Order
+	err = json.Unmarshal(order2.Data, &order)
+	if err != nil {
+		return nil, err
+	}
+
+	return &order, nil
+}
