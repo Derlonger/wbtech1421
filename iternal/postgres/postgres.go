@@ -9,15 +9,6 @@ import (
 	"wbtech1421/iternal/data"
 )
 
-//const (
-//	host     = "localhost"
-//	port     = 5432
-//	user     = "admin"
-//	password = "admin"
-//	dbname   = "wbtech_db"
-//	ssl      = "disable"
-//)
-
 type Order2 struct {
 	ID   string `gorm:"primaryKey"`
 	Data []byte
