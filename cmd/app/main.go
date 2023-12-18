@@ -6,12 +6,14 @@ import (
 	"log"
 	"time"
 	"wbtech1421/iternal/cache"
+	"wbtech1421/iternal/httpserver"
 
 	"wbtech1421/iternal/data"
 	"wbtech1421/iternal/postgres"
 	"wbtech1421/iternal/stan/client"
 )
 
+// todo протестировать http через постман
 func main() {
 	//инизацилация таблице в бд
 	fmt.Println("INIT TABLE RESULT")
@@ -20,6 +22,9 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println("INIT FROM DB")
+
+	// Инициализация HTTP сервера
+	httpserver.StartHTTPServer()
 
 	go func() {
 		for {
